@@ -5,12 +5,12 @@ use Test::Builder;
 use Time::HiRes qw(time);
 
 my $FILENAME = "temp_file.gp";
-my $REMOVER = "./bin/gnuplot_builder_tempfile_remover";
+my $REMOVER = "gnuplot_builder_tempfile_remover";
 
 sub run_remover {
     local $Test::Builder::Level = $Test::Builder::Level + 1;
     my $before = time;
-    my $code = system("perl", $REMOVER, $FILENAME);
+    my $code = system($REMOVER, $FILENAME);
     my $elapsed = time - $before;
     is(($code >> 8), 0, "remover exits ok");
     return $elapsed;

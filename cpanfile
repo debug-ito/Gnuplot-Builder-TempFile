@@ -1,4 +1,7 @@
 
+requires "File::Temp" => "0";
+requires "IPC::Open3" => "0";
+
 on 'test' => sub {
     requires 'Test::More' => "0";
 };

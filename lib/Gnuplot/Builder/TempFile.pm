@@ -1,8 +1,36 @@
 package Gnuplot::Builder::TempFile;
 use strict;
 use warnings;
+use Exporter qw(import);
+use File::Temp;
+use IPC::Open3 qw(open3);
 
 our $VERSION = "0.01";
+
+our @EXPORT_OK = qw(run);
+
+sub run {
+    my (@gnuplot_command) = @_;
+    if(!@gnuplot_command) {
+        @gnuplot_command = qw(gnuplot --persist);
+    }
+    my $tempfile = File::Temp->new;
+    $tempfile->unlink_on_destroy(0);
+    while(defined(my $input = <STDIN>)) {
+        $tempfile->print($input);
+    }
+    $tempfile->close;
+    _execute(@gnuplot_command, $tempfile->filename);
+    _execute("gnuplot_builder_tempfile_remover", $tempfile->filename);
+}
+
+sub _execute {
+    my (@command) = @_;
+    my $pid = open3(my $in, my $out, undef, @command);
+    close $in;
+    close $out;
+    return $pid;
+}
 
 1;
 __END__
