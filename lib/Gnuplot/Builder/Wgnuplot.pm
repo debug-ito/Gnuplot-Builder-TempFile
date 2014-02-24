@@ -1,6 +1,16 @@
 package Gnuplot::Builder::Wgnuplot;
 use strict;
 use warnings;
+use Exporter ();
+use Gnuplot::Builder 0.11 ();
+use Gnuplot::Builder::Process;
+
+sub import {
+    my $class = shift;
+    @Gnuplot::Builder::Process::COMMAND = qw(gnuplot_builder_tempfile_wrapper wgnuplot -persist);
+    Gnuplot::Builder->export_to_level(1, $class, @_);
+}
+
 
 1;
 __END__
@@ -40,6 +50,19 @@ You don't need it if you don't use Windows or you don't use plot windows ("windo
 
 L<Gnuplot::Builder::Wgnuplot> exports just the same functions as L<Gnuplot::Builder>.
 
+=head1 SEE ALSO
+
+=over
+
+=item *
+
+L<Gnuplot::Builder>
+
+=item *
+
+L<Gnuplot::Builder::TempFile>
+
+=back
 
 =head1 AUTHOR
  

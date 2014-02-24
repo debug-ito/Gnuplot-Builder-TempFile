@@ -65,7 +65,7 @@ the real gnuplot command. See the L</SYNOPSIS> section for usage.
 
 Usually you don't. It is much more efficient to stream script into the real gnuplot process.
 
-However, in some platforms (such as Windows) gnuplot behaves strangely when you stream script with a pipe.
+However, in some platforms (such as Windows) gnuplot behaves strangely when you stream script through a pipe.
 I found it especially difficult to keep plot windows open, so I created this.
 
 If you are in trouble with Windows gnuplot, L<Gnuplot::Builder::Wgnuplot> may help.

@@ -1,6 +1,7 @@
 
 requires "File::Temp" => "0";
 requires "IPC::Open3" => "0";
+requires "Gnuplot::Builder" => "0.11";
 
 on 'test' => sub {
     requires 'Test::More' => "0";

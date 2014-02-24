@@ -3,10 +3,11 @@ use strict;
 use warnings;
 use Test::More;
  
-plan tests => 1;
- 
 BEGIN {
-    use_ok( 'Gnuplot::Builder::TempFile' ) || print "Bail out!\n";
+    use_ok('Gnuplot::Builder::TempFile');
+    use_ok('Gnuplot::Builder::Wgnuplot');
 }
  
 diag( "Testing Gnuplot::Builder::TempFile $Gnuplot::Builder::TempFile::VERSION, Perl $], $^X" );
+
+done_testing;
