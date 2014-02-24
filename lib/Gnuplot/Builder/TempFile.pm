@@ -54,7 +54,7 @@ L<Gnuplot::Builder::TempFile> is an implementation of C<gnuplot_builder_tempfile
 bundled in this distribution.
 
 C<gnuplot_builder_tempfile_wrapper> wraps a gnuplot process with a temporary file.
-It receives script text from STDIN, stores the text in the temporary file and executes the real gnuplot
+It receives script text from STDIN, stores the text into the temporary file and executes the real gnuplot
 with the temporary file.
 It also tries to clean up the temporary file it created.
 
@@ -63,12 +63,12 @@ the real gnuplot command. See the L</SYNOPSIS> section for usage.
 
 =head2 Why Do I Need This?
 
-Usually you don't. It is much more efficient to streaming script into the real gnuplot process.
+Usually you don't. It is much more efficient to stream script into the real gnuplot process.
 
 However, in some platforms (such as Windows) gnuplot behaves strangely when you stream script with a pipe.
-I found it especially difficult to keep plot windows open, so I made this.
+I found it especially difficult to keep plot windows open, so I created this.
 
-If you are in trouble with Windows gnuplot, L<Gnuplot::Builder::WgnuplotWrapper> may help.
+If you are in trouble with Windows gnuplot, L<Gnuplot::Builder::Wgnuplot> may help.
 
 
 =head1 FUNCTIONS
@@ -98,7 +98,7 @@ This is basically the same as
 
     system(@gnuplot_command, $path_to_temp_file);
 
-except that it won't wait for the process.
+except that it won't wait for the process to finish.
 
 If C<@gnuplot_command> is empty, it uses C<< ("gnuplot", "--persist") >> by default.
 
@@ -110,7 +110,7 @@ This is basically the same as
 
     system("gnuplot_builder_tempfile_remover", $path_to_temp_file);
 
-except that it won't wait for the process.
+except that it won't wait for the process to finish.
 
 C<gnuplot_builder_tempfile_remover> removes the temporary file after waiting for a while, then exits.
 
