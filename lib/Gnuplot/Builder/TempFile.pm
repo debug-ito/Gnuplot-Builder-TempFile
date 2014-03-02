@@ -3,13 +3,26 @@ use strict;
 use warnings;
 use Exporter qw(import);
 use File::Temp;
+use File::Spec;
 use IPC::Open3 qw(open3);
 use Gnuplot::Builder 0.12 ();
 use Gnuplot::Builder::Process;
+use Carp;
 
 our $VERSION = "0.01";
 
 our @EXPORT_OK = qw(run);
+
+{
+    my $null_handle;
+
+    sub _null_handle {
+        return $null_handle if defined $null_handle;
+        my $devnull = File::Spec->devnull;
+        open $null_handle, ">", $devnull or confess("Cannot open $devnull: $!");
+        return $null_handle;
+    }
+}
 
 sub run {
     my (@gnuplot_command) = @_;
@@ -30,9 +43,8 @@ sub run {
 
 sub _execute {
     my (@command) = @_;
-    my $pid = open3(my $in, my $out, undef, @command);
+    my $pid = open3(my $in, _null_handle(), undef, @command);
     close $in;
-    close $out;
     return $pid;
 }
 
