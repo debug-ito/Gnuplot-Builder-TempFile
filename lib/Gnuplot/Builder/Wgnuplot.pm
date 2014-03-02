@@ -41,10 +41,31 @@ This means it changes the back-end to "wgnuplot" and script text is given to it 
 
 =head2 Why Do I Need This?
 
-It seems "wgnuplot" is the only implementation in Windows platform that can handle persistent plot windows.
+It seems "wgnuplot" is the only implementation in Windows platform that can handle persistent plot windows correctly.
 
-You don't need it if you don't use Windows or you don't use plot windows ("windows" or "wxt" terminals).
+Use this module if and only if you are on Windows and you want to plot graphs in interactive plot windows
+(i.e. use "windows" or "wxt" terminals).
 
+
+=head1 CAVEAT
+
+As of gnuplot 4.6, "wgnuplot" has a bug that it turns into a never-ending zombie process
+if it does not create a plot window.
+
+This means if you call C<ghelp()>, "wgnuplot" process persists even after you close the help window.
+To terminate the process, you have to use the Task Manager.
+
+=over
+
+=item *
+
+L<http://sourceforge.net/p/gnuplot/bugs/1335/>
+
+=item *
+
+L<http://sourceforge.net/p/gnuplot/bugs/1343/>
+
+=back
 
 =head1 FUNCTIONS
 

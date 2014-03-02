@@ -62,7 +62,7 @@ Gnuplot::Builder::TempFile - gnuplot wrapper using temporary files
     use Gnuplot::Builder::Process;
     
     @Gnuplot::Builder::Process::COMMAND
-        = qw(gnuplot_builder_tempfile_wrapper gnuplot --persist);
+        = qw(gnuplot_builder_tempfile_wrapper wgnuplot --persist);
 
 =head1 DESCRIPTION
 
@@ -79,7 +79,7 @@ the real gnuplot command. See the L</SYNOPSIS> section for usage.
 
 =head2 Why Do I Need This?
 
-Usually you don't. It is much more efficient to stream script into the real gnuplot process.
+Usually you don't. I guess it is more efficient to stream script into the real gnuplot process.
 
 However, in some platforms (such as Windows) gnuplot behaves strangely when you stream script through a pipe.
 I found it especially difficult to keep plot windows open, so I created this.
@@ -135,7 +135,17 @@ C<gnuplot_builder_tempfile_remover> removes the temporary file after waiting for
 
 =head1 SEE ALSO
 
+=over
+
+=item *
+
 L<Gnuplot::Builder>
+
+=item *
+
+L<Gnuplot::Builder::Wgnuplot>
+
+=back
 
 =head1 REPOSITORY
 
