@@ -4,6 +4,8 @@ use warnings;
 use Exporter qw(import);
 use File::Temp;
 use IPC::Open3 qw(open3);
+use Gnuplot::Builder 0.12 ();
+use Gnuplot::Builder::Process;
 
 our $VERSION = "0.01";
 
@@ -11,14 +13,16 @@ our @EXPORT_OK = qw(run);
 
 sub run {
     my (@gnuplot_command) = @_;
+    local $| = 1;
     if(!@gnuplot_command) {
         @gnuplot_command = qw(gnuplot --persist);
     }
     my $tempfile = File::Temp->new;
     $tempfile->unlink_on_destroy(0);
-    while(defined(my $input = <STDIN>)) {
-        $tempfile->print($input);
-    }
+    Gnuplot::Builder::Process::MockTool::receive_from_builder *STDIN, *STDOUT, sub {
+        my ($data) = @_;
+        $tempfile->print($data);
+    };
     $tempfile->close;
     _execute(@gnuplot_command, $tempfile->filename);
     _execute("gnuplot_builder_tempfile_remover", $tempfile->filename);
