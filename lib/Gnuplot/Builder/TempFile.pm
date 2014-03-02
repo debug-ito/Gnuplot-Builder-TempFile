@@ -5,7 +5,7 @@ use Exporter qw(import);
 use File::Temp;
 use File::Spec;
 use IPC::Open3 qw(open3);
-use Gnuplot::Builder 0.12 ();
+use Gnuplot::Builder 0.13 ();
 use Gnuplot::Builder::Process;
 use Carp;
 
