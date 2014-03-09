@@ -9,7 +9,7 @@ use Gnuplot::Builder 0.13 ();
 use Gnuplot::Builder::Process;
 use Carp;
 
-our $VERSION = "0.01";
+our $VERSION = "0.02";
 
 our @EXPORT_OK = qw(run);
 
