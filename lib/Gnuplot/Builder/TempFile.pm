@@ -74,6 +74,9 @@ It receives script text from STDIN, stores the text into the temporary file and 
 with the temporary file.
 It also tries to clean up the temporary file it created.
 
+Note that C<gnuplot_builder_tempfile_wrapper> discards output (STDOUT and STDERR) from the real gnuplot process.
+This means you cannot see diagnostic messages if something goes wrong in the gnuplot process.
+
 C<gnuplot_builder_tempfile_wrapper> is meant to be used with L<Gnuplot::Builder> as a replacement of
 the real gnuplot command. See the L</SYNOPSIS> section for usage.
 

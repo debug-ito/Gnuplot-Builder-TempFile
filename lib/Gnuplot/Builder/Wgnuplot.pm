@@ -39,6 +39,9 @@ It loads L<Gnuplot::Builder> and sets
 
 This means it changes the back-end to "wgnuplot" and script text is given to it as a temporary file.
 
+Note that if you use L<Gnuplot::Builder::Wgnuplot>, you cannot get diagnostic messages from plotting methods such as C<plot()>.
+This is because "wgnuplot" does not use pipes at all and C<gnuplot_builder_tempfile_wrapper> discards the output in the first place.
+
 =head2 Why Do I Need This?
 
 It seems "wgnuplot" is the only implementation in Windows platform that can handle persistent plot windows correctly.
